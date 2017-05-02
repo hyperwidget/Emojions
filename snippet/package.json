@@ -19,7 +19,7 @@
     "verbose": true,
     "setupFiles": ["./test/setup.js"],
     "collectCoverage": true,
-    "coverageDirectory": "<rootDir>/coverage/",
+    "coverageDirectory": "<rootDir>/test/coverage/",
     "collectCoverageFrom": [
       "**/*.js",
       "!**/setup.js",
