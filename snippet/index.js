@@ -4,7 +4,10 @@
   // =====================================================
 
   // Constants
-  EMOJION_ID = "emojion";
+
+  // if the goal is to make pure  functions, having to rely on these constants
+  // outside of the `state` variable makes them impure :(
+  const EMOJION_ID = "emojion";
 
   const EMOJION_STAMP = () => [
     { icon: "😅", count: 0 },
@@ -25,7 +28,7 @@
    * create a function pipe.
    * TODO: refactor to be more readable. PLEASE.
    * @param {functions} funs -> unknown number of functions
-   * @returns - a state object. 
+   * @returns - a state object.
    */
   function pipe(...funs) {
     return funs.reduce((f, g) => (...args) => g(f(...args)));
@@ -48,10 +51,10 @@
   // =====================================================
 
   /**
-   * Get all the ids from the page, 
+   * Get all the ids from the page,
    * filter out the ones we want to mount emojion bar on
-   *  
-   * @param {object} state 
+   *
+   * @param {object} state
    * @returns {object} state
    */
   function getAllIds(state) {
@@ -63,8 +66,8 @@
 
   /**
    * Loop through the dom elements that need an emojion bar
-   * Generate a new emojio stamp for that dom element. 
-   * @param {obj} state 
+   * Generate a new emojio stamp for that dom element.
+   * @param {obj} state
    * @returns {obj} state - now with emoji structures
    */
   function makeEmojionBars(state) {
@@ -78,7 +81,7 @@
    * Create our own dom element to actually mount our emojion bar in
    * This is different than the mounts that user specifices for where they want the bar.
    * TODO: Rename this.
-   * @param {obj} state 
+   * @param {obj} state
    * @returns {obj} state - our custom dom containers for our emoji bars
    */
   function makeContainers(state) {
@@ -101,10 +104,10 @@
   }
 
   /**
-   * Go through all of OUR containers, and fill out the emojion bar 
-   * Pair Dom elements up with data structure so they receive the correct emojion bar 
-   * @param {any} state 
-   * @returns 
+   * Go through all of OUR containers, and fill out the emojion bar
+   * Pair Dom elements up with data structure so they receive the correct emojion bar
+   * @param {any} state
+   * @returns
    */
   function populateContainers(state) {
     state.dom.containers.forEach(container => {
