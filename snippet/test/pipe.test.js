@@ -1,5 +1,8 @@
 const pipe = require("../index.js").pipe;
 const getAllIds = require("../index.js").getAllIds;
+const html = require("fs")
+  .readFileSync(__dirname + "/../example.html")
+  .toString();
 
 describe("pipe()", () => {
   const functionSpy1 = sinon.spy();
@@ -26,20 +29,16 @@ describe("getAllIds()", function() {
     emojis: {}
   };
 
-  // stub out a dummy dom. Someday this could be moved to a helper file.
-  document.body.innerHTML =
-    "<div>" +
-    '  <span id="emojion_dlkfjo2" />' +
-    '  <button id="emojion_2902s" />' +
-    "</div>";
-
   it("returns a mounts array with at least one mounting point", function() {
+    document.documentElement.innerHTML = html;
+
     getAllIds(state);
     expect(state.dom.mounts.length).toBeGreaterThan(0);
   });
 
   it("finds a dom element with an emojion id", function() {
+    document.documentElement.innerHTML = html;
     const alteredState = getAllIds(state);
-    expect(alteredState.dom.mounts[0].id).toBe("emojion_dlkfjo2");
+    expect(alteredState.dom.mounts[0].id).toBe("emojions_235kjhab");
   });
 });
